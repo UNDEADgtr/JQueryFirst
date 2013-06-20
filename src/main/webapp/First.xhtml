@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  User: Dzmitry
+  Date: 19.06.13
+  Time: 16:02
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+
+    <title>Simple JSF Facelets page</title>
+    <h:outputStylesheet name="css/ui-lightness/jquery-ui-1.8.11.custom.css"/>
+    <h:outputScript name="jquery-1.5.1.min.js" library="js"/>
+    <h:outputScript name="jquery-ui-1.8.11.custom.min.js" library="js"/>
+</h:head>
+
+<h:body>
+
+    <script type="text/javascript">
+        // increase the default animation speed to exaggerate the effect
+        $.fx.speeds._default = 1000;
+        $(function() {
+            $( "#pop" ).dialog({
+                autoOpen: false,
+                show: "blind",
+                hide: "explode",
+                title: "jQuery-JSF Integration"
+            });
+
+            $( "#link" ).click(function() {
+                $( "#pop" ).dialog( "open" );
+                return false;
+            });
+        });
+    </script>
+    <h1>jQuery-JSF Integration Example</h1>
+    <p>
+        <h:outputLink id="link" value="#">
+            <h:outputText value="jQuery Dialog (click)"/>
+        </h:outputLink>
+    </p>
+    <p>
+        <h:outputLink id="link" value="#" onmouseover="$('#pop').dialog('open'); return false;">
+            <h:outputText value="jQuery Dialog (onmouseover)"/>
+        </h:outputLink>
+    </p>
+    <h:panelGroup id="pop">
+        <p>This is an animated dialog which is useful for displaying information.<br/>The dialog window can be moved, resized and closed with the 'x' icon.</p>
+        <h:button onclick="$('#pop').dialog('close'); return false;" value="Close"/>
+    </h:panelGroup>
+</h:body>
+
+</html>

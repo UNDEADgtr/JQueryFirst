@@ -1,0 +1,7 @@
+{
+    "car":{
+        "model" : "string",
+        "color" : "color",
+        "cost"  : "long"
+    }
+}

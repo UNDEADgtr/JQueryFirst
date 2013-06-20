@@ -1,0 +1,12 @@
+{
+    "car1":{
+        "model" : "BMW",
+        "color" : "black",
+        "cost"  : 10000
+    },
+    "car2":{
+        "model" : "Opel",
+        "color" : "green",
+        "cost"  : 5000
+    }
+}
