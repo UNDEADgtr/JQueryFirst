@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  User: Dzmitry
+  Date: 19.06.13
+  Time: 16:02
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+        >
+
+<h:body>
+
+    <ui:composition>
+
+
+        <h:panelGrid columns="4" style="width: 100%">
+            <h:column>
+                <h:outputText value="Parameter"></h:outputText><br/>
+                <h:outputText value="model"></h:outputText>
+            </h:column>
+            <h:column>
+                <h:outputText value="Value"></h:outputText><br/>
+                <h:inputText id="modelValue" value="123"></h:inputText>
+            </h:column>
+            <h:column>
+                <h:outputText value="Description"></h:outputText><br/>
+                <h:outputText value="The model that needs to be fetched"></h:outputText>
+            </h:column>
+            <h:column>
+                <h:outputText value="Type"></h:outputText><br/>
+                <h:outputText value="String"></h:outputText>
+            </h:column>
+        </h:panelGrid>
+
+        <h:commandButton id="fetchButton"
+                         value="Fetch">
+        </h:commandButton>
+
+        <h:inputTextarea id="fetchedCar"
+                         rows="10"
+                         cols="50"
+                         readonly="true">
+        </h:inputTextarea>
+
+        <script type="text/javascript">
+            $('#fetchButton').click(function () {
+                var model = $('#modelValue').val();
+                $.getJSON('data.json', {}, function (data) {
+                    var items = [];
+                    $.each(data, function (key, val) {
+                        var obj = val.model;
+                        if (obj == model) {
+                            $.each(val, function (key1, val1) {
+                                items.push(key1 + ": " + val1 + '\n');
+                            });
+                        }
+                    });
+                    $('#fetchedCar').html('');
+                    $('#fetchedCar').append(items.join(''));
+                });
+            });
+
+
+        </script>
+    </ui:composition>
+
+
+</h:body>
+
+</html>

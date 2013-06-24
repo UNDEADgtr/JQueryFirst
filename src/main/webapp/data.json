@@ -1,12 +1,1 @@
-{
-    "car1":{
-        "model" : "BMW",
-        "color" : "black",
-        "cost"  : 10000
-    },
-    "car2":{
-        "model" : "Opel",
-        "color" : "green",
-        "cost"  : 5000
-    }
-}
+{"car2":{"model":"Opel","color":"green","cost":5000},"car3":{"model":"1","color":"1","cost":"1"},"car0":{"model":"b","color":"b","cost":"b"},"car1":{"model":"BMW","color":"black","cost":10000},"car9":{"model":"","color":"","cost":""},"car17":{"model":"","color":"","cost":""},"car8":{"model":"","color":"","cost":""},"car16":{"model":"","color":"","cost":""},"car15":{"model":"","color":"","cost":""},"car5":{"model":"","color":"","cost":""},"car4":{"model":"1","color":"1","cost":"1"},"car7":{"model":"","color":"","cost":""},"car6":{"model":"","color":"","cost":""},"car10":{"model":"","color":"","cost":""},"car14":{"model":"","color":"","cost":""},"car13":{"model":"","color":"","cost":""},"car12":{"model":"","color":"","cost":""},"car11":{"model":"","color":"","cost":""}}

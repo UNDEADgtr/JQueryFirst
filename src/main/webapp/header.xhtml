@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  User: Dzmitry
+  Date: 19.06.13
+  Time: 16:02
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+        >
+
+<h:body>
+
+    <ui:composition>
+
+        <ul id="headerMenu">
+            <li><a href="#">Add</a>
+                <ul class="active">
+                    <li><a href="#">View</a></li>
+                    <li><a href="#">Add</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Get</a></li>
+            <li><a href="#">Update</a></li>
+            <li><a href="#">Delete</a></li>
+        </ul>
+
+        <script type="text/javascript">
+            $('#headerMenu li ul').css({
+                display: "none",
+                left: "auto"
+            });
+            $('#headerMenu li').hover(function () {
+                $(this)
+                        .find('ul')
+                        .stop(true, true)
+                        .slideDown('fast');
+            }, function () {
+                $(this)
+                        .find('ul')
+                        .stop(true, true)
+                        .slideUp('slow')
+            });
+
+            $('#headerMenu li li').click(function () {
+                if ($(this).text() == 'View') {
+                    $('#tabs').tabs('select', 0);
+                    $("#accordionAdd").accordion("option", "active", 0);
+                } else if ($(this).text() == 'Add') {
+                    $('#tabs').tabs('select', 0);
+                    $("#accordionAdd").accordion("option", "active", 1);
+                }
+            });
+
+            $('#headerMenu li').click(function () {
+                if ($(this).text() == 'Add') {
+                    $('#tabs').tabs('select', 0);
+                } else if ($(this).text() == 'Get') {
+                    $('#tabs').tabs('select', 1);
+                } else if ($(this).text() == 'Update') {
+                    $('#tabs').tabs('select', 2);
+                } else if ($(this).text() == 'Delete') {
+                    $('#tabs').tabs('select', 3);
+                }
+            });
+
+        </script>
+    </ui:composition>
+
+
+</h:body>
+
+</html>

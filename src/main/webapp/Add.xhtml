@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  User: Dzmitry
+  Date: 19.06.13
+  Time: 16:02
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+        >
+
+<h:body>
+
+    <ui:composition>
+
+
+        <div id="accordionAdd" style="width: 90%">
+            <div>
+                <h3><a href="#">View</a></h3>
+
+                <div>
+                    <h:panelGrid columns="2">
+                        <h:column>
+
+                            <input type="radio"
+                                   name="jsonDataType"
+                                   value="simpleList"
+                                   checked="checked"/>Простой список<br/>
+                            <input type="radio"
+                                   name="jsonDataType"
+                                   value="json"/>JSON<br/>
+                            <input type="radio"
+                                   name="jsonDataType"
+                                   value="another"/>Другое<br/>
+
+                            <h:commandButton id="buttonData"
+                                             value="Data"/>
+                        </h:column>
+                        <h:column>
+                            <h:inputTextarea id="data"
+                                             rows="10"
+                                             styleClass="jsonData"
+                                             cols="50">
+                            </h:inputTextarea>
+                        </h:column>
+                    </h:panelGrid>
+
+                </div>
+            </div>
+            <div>
+                <h3><a href="#">Add</a></h3>
+
+                <div>
+                    <h:form>
+                        <h:panelGrid columns="3">
+                            <h:column>
+                                <h:outputText value="Model">
+
+                                </h:outputText>
+                                <h:inputText
+                                        value="#{jsonCarsBean.car['model']}">
+
+                                </h:inputText>
+                            </h:column>
+                            <h:column>
+                                <h:outputText
+                                        value="Color">
+
+                                </h:outputText>
+                                <h:inputText
+                                        value="#{jsonCarsBean.car['color']}">
+
+                                </h:inputText>
+                            </h:column>
+                            <h:column>
+                                <h:outputText
+                                        value="Cost">
+
+                                </h:outputText>
+                                <h:inputText
+                                        value="#{jsonCarsBean.car['cost']}">
+
+                                </h:inputText>
+                            </h:column>
+                        </h:panelGrid>
+                        <h:commandButton value="Save"
+                                         action="#{jsonCarsBean.writeJson()}">
+
+                        </h:commandButton>
+                        <h:outputText
+                                value="#{jsonCarsBean.car['model']}"/>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
+
+        <script type="text/javascript">
+
+
+            $('#buttonData').click(function () {
+                $.getJSON('data.json', function (data) {
+                    var items = [];
+                    $.each(data, function (key, val) {
+                        $.each(val, function (key1, val1) {
+                            items.push(key1 + ": " + val1 + '\n');
+                        });
+                        items.push('\n')
+                    });
+                    $('#data').html('');
+                    $('#data').append(items.join(''));
+                });
+                $('#data').fadeToggle();
+            });
+
+            $(':radio[name=jsonDataType]').click(function () {
+                var type = $(':radio[name=jsonDataType]').filter(":checked").val();
+
+                $.getJSON('data.json', function (data) {
+                    var items = [];
+                    switch (type) {
+                        case 'simpleList':
+                        {
+                            $.each(data, function (key, val) {
+                                $.each(val, function (key1, val1) {
+                                    items.push(key1 + ": " + val1 + '\n');
+                                });
+                                items.push('\n')
+                            });
+                            break;
+                        }
+                        case 'json':
+                        {
+                            var n, v, json = [], arr = (data &amp;&amp; data.constructor == Array);
+                            for (n in data) {
+                                v = data[n];
+                                t = typeof(v);
+                                if (t == "string") {
+                                    v = '"' + v + '"';
+                                } else if (t == "object" &amp;&amp; v !== null) {
+                                    v = JSON.stringify(v);
+                                }
+
+                                json.push((arr ? "" : '"' + n + '":') + String(v) + '\n');
+                            }
+                            items.push((arr ? "[" : "{") + '\n' + String(json) + (arr ? "]" : "}"));
+                            break;
+                        }
+                        case 'another':
+                        {
+                            break;
+                        }
+                    }
+                    $('#data').html('');
+                    $('#data').append(items.join(''));
+                });
+            });
+
+
+        </script>
+    </ui:composition>
+
+
+</h:body>
+
+</html>

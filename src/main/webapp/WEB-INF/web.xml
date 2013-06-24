@@ -7,7 +7,7 @@
 
     <display-name>Archetype Created Web Application</display-name>
     <welcome-file-list>
-        <welcome-file>Main.xhtml</welcome-file>
+        <welcome-file>jsonCar.xhtml</welcome-file>
     </welcome-file-list>
 
     <!-- JSF mapping -->
