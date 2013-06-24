@@ -1,0 +1,12 @@
+
+#addConent, #getConent, #updateConent, #deleteConent  {
+    display: none;
+}
+
+.box1{
+    text-align: center;
+}
+
+.jsonModel {
+    display: none;
+}

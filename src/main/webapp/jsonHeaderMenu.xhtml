@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  User: Dzmitry
+  Date: 19.06.13
+  Time: 16:02
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+        >
+
+<h:body>
+
+    <ui:composition>
+
+        <div id="mainMenu">
+            <ul>
+                <li><a href="#" class="active"><span>home</span></a></li>
+                <li><a href="#"><span>add</span></a></li>
+                <li><a href="#"><span>get</span></a></li>
+                <li><a href="#"><span>update</span></a></li>
+                <li><a href="#"><span>delete</span></a></li>
+            </ul>
+        </div>
+
+        <script type="text/javascript">
+            $('#mainMenu span').click(function () {
+
+                if ($('#addConent').css('display') == 'block') {
+                    $('#addConent').slideToggle();
+                }
+                if ($('#getConent').css('display') == 'block') {
+                    $('#getConent').slideToggle();
+                }
+                if ($('#updateConent').css('display') == 'block') {
+                    $('#updateConent').slideToggle();
+                }
+                if ($('#deleteConent').css('display') == 'block') {
+                    $('#deleteConent').slideToggle();
+                }
+
+                switch ($(this).text()) {
+                    case 'home':
+                    {
+                        break;
+                    }
+                    case 'add':
+                    {
+                        $('#addConent').slideToggle();
+                        break;
+                    }
+                    case 'get':
+                    {
+                        $('#getConent').slideToggle();
+                        break;
+                    }
+                    case 'update':
+                    {
+                        $('#updateConent').slideToggle();
+                        break;
+                    }
+                    case 'delete':
+                    {
+                        $('#deleteConent').slideToggle();
+                        break;
+                    }
+                }
+            });
+
+
+        </script>
+    </ui:composition>
+
+
+</h:body>
+
+</html>

@@ -54,44 +54,32 @@
                 <h3><a href="#">Add</a></h3>
 
                 <div>
-                    <h:form>
-                        <h:panelGrid columns="3">
-                            <h:column>
-                                <h:outputText value="Model">
+                    <h:form id="addForm">
 
-                                </h:outputText>
-                                <h:inputText
-                                        value="#{jsonCarsBean.car['model']}">
+                        <div id="divModel">
+                            <h:outputText value="Model: "/>
+                            <h:inputText value="#{jsonCarsBean.car['model']}"/>
+                        </div>
+                        <br/>
 
-                                </h:inputText>
-                            </h:column>
-                            <h:column>
-                                <h:outputText
-                                        value="Color">
+                        <div id="divColor">
+                            <h:outputText value="Color: "/>
+                            <h:inputText value="#{jsonCarsBean.car['color']}"/>
+                        </div>
+                        <br/>
 
-                                </h:outputText>
-                                <h:inputText
-                                        value="#{jsonCarsBean.car['color']}">
+                        <div id="divCost">
+                            <h:outputText value="Cost: "/>
+                            <h:inputText title="Enter a real cost" value="#{jsonCarsBean.car['cost']}"/>
+                        </div>
+                        <br/>
 
-                                </h:inputText>
-                            </h:column>
-                            <h:column>
-                                <h:outputText
-                                        value="Cost">
+                        <div>
+                            <h:commandButton value="Save"
+                                             action="#{jsonCarsBean.writeJson()}"/> <br/>
+                            <h:outputText value="#{jsonCarsBean.car['model']}"/>
 
-                                </h:outputText>
-                                <h:inputText
-                                        value="#{jsonCarsBean.car['cost']}">
-
-                                </h:inputText>
-                            </h:column>
-                        </h:panelGrid>
-                        <h:commandButton value="Save"
-                                         action="#{jsonCarsBean.writeJson()}">
-
-                        </h:commandButton>
-                        <h:outputText
-                                value="#{jsonCarsBean.car['model']}"/>
+                        </div>
                     </h:form>
                 </div>
             </div>
@@ -100,6 +88,16 @@
 
         <script type="text/javascript">
 
+            $('#divCost [type=text]').poshytip({
+                className: 'tip-skyblue',
+                showOn: 'focus',
+                alignTo: 'target',
+                alignX: 'center',
+                alignY: 'bottom',
+                offsetX: 0,
+                offsetY: 5,
+                showTimeout: 100
+            });
 
             $('#buttonData').click(function () {
                 $.getJSON('data.json', function (data) {
@@ -159,8 +157,38 @@
                 });
             });
 
+            $('#addForm').bind('submit', function (event) {
+                $('#divModel [type=text]').each(function () {
+                    if (!$(this).val().length) {
+                        event.preventDefault();
+                        $(this).css('border', '2px solid red');
+                    } else {
+                        $(this).css('border', '1px solid black');
+                    }
+                });
+
+            });
+
+            $('#divColor [type=text]').blur(function () {
+                if ($(this).val().length == 0) {
+                    $(this).after('<span class="error">Please, enter color</span>')
+                }
+            });
+
+            $('#divColor [type=text]').focus(function () {
+                $(this)
+                        .next('span')
+                        .remove()
+            });
 
         </script>
+
+        <style type="text/css">
+            .error {
+                border: 4px solid yellow;
+            }
+
+        </style>
     </ui:composition>
 
 
